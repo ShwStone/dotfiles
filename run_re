@@ -1,0 +1,23 @@
+#!/bin/bash
+
+md5sum $@ > ~/Dotfiles/.run_re/new_md5
+diff ~/Dotfiles/.run_re/new_md5 ~/Dotfiles/.run_re/md5 > ~/Dotfiles/.run_re/diff_tmp
+if [ $? == 0 ]
+then
+        echo "Run your code here:"
+        rm ~/Dotfiles/.run_re/new_md5
+        ~/Dotfiles/.run_re/run
+else
+        cp ~/Dotfiles/.run_re/new_md5 ~/Dotfiles/.run_re/md5
+        rm ~/Dotfiles/.run_re/new_md5
+        g++ -O2 -lm -Wall -std=c++17 -fsanitize=address,undefined -o ~/Dotfiles/.run_re/run $@
+        if [ $? == 0 ]
+        then
+                echo "Compiled successfully!"
+                echo "Run your code here:"
+                ~/Dotfiles/.run_re/run
+        else
+                echo "Compiled error!"
+                rm ~/Dotfiles/.run_re/md5
+        fi
+fi
