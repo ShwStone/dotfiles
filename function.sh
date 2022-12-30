@@ -6,7 +6,7 @@ function ws() {
 }
 function mk() {
         mkdir -p $1
-        cp ~/.run/default.cpp $1/$1.cpp
+        cp ~/Dotfiles/default.cpp $1/$1.cpp
         touch $1/$1.in
 }
 function dos2linux() {
