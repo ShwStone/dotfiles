@@ -10,7 +10,9 @@ function mk() {
         touch $1/$1.in
 }
 function dos2linux() {
-	convmv -f GBK -t UTF-8 --notest --nosmart $1
 	iconv -f GBK -t UTF-8 -o $1 $1
+	convmv -f GBK -t UTF-8 --notest --nosmart $1
 }
-
+function s() {
+	setsid $@ && exit;
+}
