@@ -13,6 +13,3 @@ function dos2linux() {
 	iconv -f GBK -t UTF-8 -o $1 $1
 	convmv -f GBK -t UTF-8 --notest --nosmart $1
 }
-function s() {
-	setsid $@ && exit;
-}
