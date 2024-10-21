@@ -1,4 +1,5 @@
 ## Alias
+alias ws="cd /run/media/shwstone/ShwStone"
 alias clip="xsel -b <"
 alias ls="ls --color=auto"
 alias cls="clear"
@@ -18,4 +19,10 @@ alias virtual="sudo modprobe vboxdrv; sudo modprobe vboxnetadp; sudo modprobe vb
 alias s="setsid"
 alias q="exit"
 alias proxy="export http_proxy=\"http://127.0.0.1:7890\"; export https_proxy=\"http://127.0.0.1:7890\"; export HTTP_PROXY=\"http://127.0.0.1:7890\"; export HTTPS_PROXY=\"http://127.0.0.1:7890\";"
+alias gcc="LANGUAGE=zh_CN_hentai gcc"
+alias g++="LANGUAGE=zh_CN_hentai g++"
 alias unproxy="unset http_proxy; unset https_proxy; unset HTTP_PROXY; unset HTTPS_PROXY;"
+alias vpython="./.python_venv/bin/python"
+alias vpip="./.python_venv/bin/pip"
+alias mkvpy=""
+alias rbackup="sudo mount /dev/sda3 /mnt && sudo rsync -aAXHvx --delete --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' --exclude='/home/shwstone/Data/*' / /mnt; sudo umount /mnt"
