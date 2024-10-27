@@ -14,3 +14,28 @@ function compile() {
 		./$FILE
 	fi
 }
+function rbackup() {
+	DEVICE="/dev/sda3"
+	if [ $# -eq 1 ]; then
+		DEVICE=$1
+	fi
+	if [ ! -e $DEVICE ]; then
+		echo "$DEVICE does not exist."
+		return -1
+	fi
+	sudo mount $DEVICE /mnt && sudo rsync -aAXHvxr --delete --delete-excluded --exclude-from=/home/shwstone/Dotfiles/rbackup.exclude / /mnt
+	sudo umount $DEVICE
+}
+function dbackup() {
+	DEVICE="/dev/sda4"
+	if [ $# -eq 1 ]; then
+		DEVICE=$1
+	fi
+	if [ ! -e $DEVICE ]; then
+		echo "$DEVICE does not exist."
+		return -1
+	fi
+	sudo mount $DEVICE /mnt && sudo rsync -avxr --delete --delete-excluded --exclude-from=/home/shwstone/Dotfiles/dbackup.exclude /home/shwstone /mnt/dbackup
+	sudo umount $DEVICE
+}
+

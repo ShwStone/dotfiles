@@ -25,4 +25,3 @@ alias unproxy="unset http_proxy; unset https_proxy; unset HTTP_PROXY; unset HTTP
 alias vpython="./.python_venv/bin/python"
 alias vpip="./.python_venv/bin/pip"
 alias mkvpy=""
-alias rbackup="sudo mount /dev/sda3 /mnt && sudo rsync -aAXHvx --delete --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' --exclude='/home/shwstone/Data/*' / /mnt; sudo umount /mnt"
