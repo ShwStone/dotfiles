@@ -1,7 +1,7 @@
 ## Function
 function mk() {
         mkdir -p $1
-        cp ~/Dotfiles/default.cpp $1/$1.cpp
+        cp ~/.dotfiles/default.cpp $1/$1.cpp
         touch $1/$1.in
 }
 function dos2linux() {
@@ -23,7 +23,7 @@ function rbackup() {
 		echo "$DEVICE does not exist."
 		return -1
 	fi
-	sudo mount $DEVICE /mnt && sudo rsync -aAXHvxr --delete --delete-excluded --exclude-from=/home/shwstone/Dotfiles/rbackup.exclude / /mnt
+	sudo mount $DEVICE /mnt && sudo rsync -aAXHvxr --delete --delete-excluded --exclude-from=/home/shwstone/.dotfiles/rbackup.exclude / /mnt
 	sudo umount $DEVICE
 }
 function dbackup() {
@@ -35,7 +35,7 @@ function dbackup() {
 		echo "$DEVICE does not exist."
 		return -1
 	fi
-	sudo mount $DEVICE /mnt && sudo rsync -avxr --delete --delete-excluded --exclude-from=/home/shwstone/Dotfiles/dbackup.exclude /home/shwstone /mnt/dbackup
+	sudo mount $DEVICE /mnt && sudo rsync -avxr --delete --delete-excluded --exclude-from=/home/shwstone/.dotfiles/dbackup.exclude /home/shwstone /mnt/dbackup
 	sudo umount $DEVICE
 }
 
