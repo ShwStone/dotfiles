@@ -23,7 +23,7 @@ function rbackup() {
 		echo "$DEVICE does not exist."
 		return -1
 	fi
-	sudo mount $DEVICE /mnt && sudo rsync -aAXHvxr --delete --delete-excluded --exclude-from=/home/shwstone/.dotfiles/rbackup.exclude / /mnt
+	sudo mount $DEVICE /mnt && sudo rsync -aAXHvxr --delete --delete-excluded --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' --exclude='/home/shwstone/[^.]*' / /mnt
 	sudo umount $DEVICE
 }
 function dbackup() {
@@ -35,7 +35,31 @@ function dbackup() {
 		echo "$DEVICE does not exist."
 		return -1
 	fi
-	sudo mount $DEVICE /mnt && sudo rsync -avxr --delete --delete-excluded --exclude-from=/home/shwstone/.dotfiles/dbackup.exclude /home/shwstone /mnt/dbackup
+	sudo mount $DEVICE /mnt && sudo rsync -avxr --delete --delete-excluded --exclude='/.*' /home/shwstone/ /mnt/dbackup
+	sudo umount $DEVICE
+}
+function rrecover() {
+	DEVICE="/dev/sda3"
+	if [ $# -eq 1 ]; then
+		DEVICE=$1
+	fi
+	if [ ! -e $DEVICE ]; then
+		echo "$DEVICE does not exist."
+		return -1
+	fi
+	sudo mount $DEVICE /mnt && sudo rsync -aAXHvxr --delete --delete-excluded --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' --exclude='/home/shwstone/[^.]*' /mnt/ /
+	sudo umount $DEVICE
+}
+function drecover() {
+	DEVICE="/dev/sda4"
+	if [ $# -eq 1 ]; then
+		DEVICE=$1
+	fi
+	if [ ! -e $DEVICE ]; then
+		echo "$DEVICE does not exist."
+		return -1
+	fi
+	sudo mount $DEVICE /mnt && sudo rsync -avxr --delete --delete-excluded --exclude='/.*' /mnt/dbackup/ /home/shwstone
 	sudo umount $DEVICE
 }
 
