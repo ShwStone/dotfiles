@@ -24,7 +24,7 @@ function rbackup() {
 		return -1
 	fi
 	sudo mount $DEVICE /mnt && sudo rsync -aAXHvxr --delete --delete-excluded --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' --exclude='/home/shwstone/[^.]*' / /mnt
-	sudo umount $DEVICE
+	sudo umount /mnt
 }
 function dbackup() {
 	DEVICE="/dev/sda4"
@@ -36,7 +36,7 @@ function dbackup() {
 		return -1
 	fi
 	sudo mount $DEVICE /mnt && sudo rsync -avxr --delete --delete-excluded --exclude='/.*' /home/shwstone/ /mnt/dbackup
-	sudo umount $DEVICE
+	sudo umount /mnt
 }
 function rrecover() {
 	DEVICE="/dev/sda3"
@@ -48,7 +48,7 @@ function rrecover() {
 		return -1
 	fi
 	sudo mount $DEVICE /mnt && sudo rsync -aAXHvxr --delete --delete-excluded --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' --exclude='/home/shwstone/[^.]*' /mnt/ /
-	sudo umount $DEVICE
+	sudo umount /mnt
 }
 function drecover() {
 	DEVICE="/dev/sda4"
@@ -60,6 +60,6 @@ function drecover() {
 		return -1
 	fi
 	sudo mount $DEVICE /mnt && sudo rsync -avxr --delete --delete-excluded --exclude='/.*' /mnt/dbackup/ /home/shwstone
-	sudo umount $DEVICE
+	sudo umount /mnt
 }
 
